@@ -1,0 +1,75 @@
+.contacto-page {
+  --background: white;
+  --padding-bottom: calc(var(--ion-safe-area-bottom) + 70px);
+
+  .container {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #99d7e2;
+
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      color: #1a4edd;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #07162c;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      .contact-card {
+        background-color: #bfe6ff;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        padding: 10px;
+        
+
+        ion-card-header {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          color: #2563eb;
+          
+          
+          .contact-icon {
+            font-size: 40px;
+            color: #29d337; // azul suave
+            margin-bottom: 10px;
+          }
+
+          ion-card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+          }
+
+          ion-card-subtitle {
+            font-size: 13px;
+            color: #474d55;
+          }
+        }
+
+        ion-card-content {
+          ion-button {
+            font-weight: bold;
+            border-radius: 12px;
+            background: #60a5fa; // azul más suave
+            color: rgb(35, 163, 18);
+          }
+        }
+      }
+    }
+  }
+}

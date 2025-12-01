@@ -1,0 +1,163 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="bg-primary">
+      </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="emocionales-page">
+  <!-- Saludo -->
+
+  <div
+    class="welcome-text mb-4 p-5 rounded-3"
+    style="background: linear-gradient(90deg, #0038b8, #4c8cff)"
+  >
+    <p class="text-light">Registro diario</p>
+    <p class="text-light">Fecha: {{dateActually}}</p>
+  </div>
+
+  <div class="container">
+    <!-- Estado emocional -->
+    <div class="container">
+      <div class="row">
+        <div class="col-12 rounded-3 p-4 mb-4 border border-dark">
+          <div class="section-title mb-3">¿Como te sientes?</div>
+          <!-- Cards de emociones -->
+          <div class="row g-3">
+            <div class="col-6">
+              <div
+                class="card emotion-card"
+                [class.border-primary]="selectedEmotion === 'Feliz'"
+                (click)="selectEmotion('Feliz')"
+              >
+                <div class="card-body text-center">
+                  <div class="fs-1 mb-2">😊</div>
+                  <h6 class="card-title">Feliz</h6>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div
+                class="card emotion-card"
+                [class.border-primary]="selectedEmotion === 'Tranquilo'"
+                (click)="selectEmotion('Tranquilo')"
+              >
+                <div class="card-body text-center">
+                  <div class="fs-1 mb-2">😌</div>
+                  <h6 class="card-title">Tranquilo</h6>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div
+                class="card emotion-card"
+                [class.border-primary]="selectedEmotion === 'Ansioso'"
+                (click)="selectEmotion('Ansioso')"
+              >
+                <div class="card-body text-center">
+                  <div class="fs-1 mb-2">😰</div>
+                  <h6 class="card-title">Ansioso</h6>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div
+                class="card emotion-card"
+                [class.border-primary]="selectedEmotion === 'Triste'"
+                (click)="selectEmotion('Triste')"
+              >
+                <div class="card-body text-center">
+                  <div class="fs-1 mb-2">😔</div>
+                  <h6 class="card-title">Triste</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Acceso rápido -->
+    <div class="container">
+      <div class="row">
+        <div class="col-12 rounded-3 p-4 mb-4 border border-dark">
+          <div class="section-title mb-3">Nivel de energia</div>
+
+          <!-- Opciones de energía -->
+          <div class="row g-3">
+            <div class="energy-progress-container">
+              <!-- Barra visual -->
+              <div class="progress energy-bar" style="height: 30px">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  [style.width.%]="energyLevel * 33.33"
+                  [ngClass]="getEnergyColor()"
+                ></div>
+              </div>
+
+              <!-- Puntos de selección -->
+              <div class="energy-points mt-3">
+                <div class="d-flex justify-content-between">
+                  <div
+                    class="energy-point"
+                    [class.active]="energyLevel === 1"
+                    (click)="setEnergyLevel(1)"
+                  >
+                    <span class="energy-emoji">😴</span>
+                    <span class="energy-label">Bajo</span>
+                  </div>
+
+                  <div
+                    class="energy-point"
+                    [class.active]="energyLevel === 2"
+                    (click)="setEnergyLevel(2)"
+                  >
+                    <span class="energy-emoji">😐</span>
+                    <span class="energy-label">Medio</span>
+                  </div>
+
+                  <div
+                    class="energy-point"
+                    [class.active]="energyLevel === 3"
+                    (click)="setEnergyLevel(3)"
+                  >
+                    <span class="energy-emoji">😃</span>
+                    <span class="energy-label">Alto</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Energía seleccionada -->
+          <div *ngIf="energyLevel > 0" class="mt-4 p-3 bg-light rounded">
+            <p class="mb-0">
+              Nivel de energía seleccionado:
+              <strong>{{ getEnergyLabel() }}</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="selectedEmotion" class="mt-4 p-3 bg-light rounded">
+      <p class="mb-0">
+        Emoción seleccionada: <strong>{{ selectedEmotion }}</strong>
+      </p>
+    </div>
+
+    <div class="row g-3 py-3">
+      <div class="col-12 py-3">
+        <div class="text-center border" (click)="goToMeditation()">
+          <button
+            class="btn btn-primary w-100 py-3 register-button"
+            style="background: linear-gradient(90deg, #0038b8, #4c8cff)"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

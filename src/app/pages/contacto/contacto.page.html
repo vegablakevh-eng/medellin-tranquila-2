@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="contacto-page">
+
+  <div class="container">
+
+    <h1 class="title">Contactos de Apoyo</h1>
+    <p class="subtitle">Números y servicios importantes para ti</p>
+
+    <div class="contact-list">
+      <ion-card *ngFor="let contacto of contactos" class="contact-card">
+        <ion-card-header>
+          <ion-icon [name]="contacto.icon" class="contact-icon"></ion-icon>
+          <ion-card-title>{{ contacto.nombre }}</ion-card-title>
+          <ion-card-subtitle>{{ contacto.descripcion }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-button expand="block" color="tertiary" (click)="llamar(contacto.telefono)">
+            📞 Llamar: {{ contacto.telefono }}
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+
+

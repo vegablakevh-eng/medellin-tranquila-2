@@ -1,0 +1,8 @@
+.configuraciones-page {
+  // 🥇 SOLUCIÓN PARA LA SUPERPOSICIÓN DE LA BARRA DE PESTAÑAS (TAB BAR)
+  // Añade un padding inferior grande (70px) para compensar el alto de la tab bar (~50px) 
+  // más un margen de seguridad, evitando que la última lista quede tapada.
+  --padding-bottom: calc(var(--ion-safe-area-bottom, 0px) + 70px) !important; 
+  
+  // ... (el resto de los estilos de .profile-section, .config-list, etc., van aquí)
+}

@@ -1,0 +1,105 @@
+.emocionales-page {
+  // 🥇 SOLUCIÓN PARA LA SUPERPOSICIÓN DE LA BARRA DE PESTAÑAS (TAB BAR)
+  // Añade un padding inferior grande (70px) para compensar el alto de la tab bar (~50px) 
+  // más un margen de seguridad, evitando que la última lista quede tapada.
+  --padding-bottom: calc(var(--ion-safe-area-bottom, 0px) + 90px) !important; 
+  
+  // ... (el resto de los estilos de .profile-section, .config-list, etc., van aquí)
+}
+.welcome-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.register-button {
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #0038B8, #4C8CFF);
+}
+
+.stat-number {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.quick-access-item {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+  &:active {
+    background-color: #e9ecef !important;
+  }
+}
+
+.quick-access-label {
+  font-size: 14px;
+  color: #000000;
+  margin: 0;
+}
+
+// Asegurar que el header use el color primario de Bootstrap
+.bg-primary {
+  background-color: #0d6efd !important;
+}
+
+.energy-progress-container {
+  .energy-bar {
+    border-radius: 15px;
+    background-color: #e9ecef;
+    cursor: pointer;
+    
+    .progress-bar {
+      border-radius: 15px;
+      transition: width 0.3s ease;
+    }
+  }
+  
+  .energy-points {
+    .energy-point {
+      text-align: center;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background-color: #f8f9fa;
+      }
+      
+      &.active {
+        background-color: #e3f2fd;
+        border: 2px solid #2196f3;
+        
+        .energy-label {
+          font-weight: bold;
+          color: #1976d2;
+        }
+      }
+      
+      .energy-emoji {
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 4px;
+      }
+      
+      .energy-label {
+        font-size: 0.9rem;
+        color: #495057;
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<ion-content>
+  <div class="container">
+    <h1 class="title">Crear Cuenta</h1>
+    <p class="subtitle">Regístrate para ingresar</p>
+
+    <div class="form">
+      <label class="label">Correo electrónico</label>
+      <input class="input" type="email" placeholder="hola@usuario.co" [(ngModel)]="email">
+
+      <label class="label">Contraseña</label>
+      <input class="input" type="password" placeholder="••••••" [(ngModel)]="password">
+
+      <label class="label">Confirmar Contraseña</label>
+      <input class="input" type="password" placeholder="••••••" [(ngModel)]="confirmPassword">
+
+      <button class="btn-primary" (click)="onRegister()" [disabled]="loading">
+        {{ loading ? 'Creando...' : 'Crear Cuenta' }}
+      </button>
+
+      <button class="btn-outline" (click)="goToLogin()" [disabled]="loading">
+        Volver a Login
+      </button>
+
+      <div *ngIf="error" class="error" style="color: red; margin-top: 10px;">
+        <p>{{ error }}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

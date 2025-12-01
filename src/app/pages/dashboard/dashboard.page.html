@@ -1,0 +1,51 @@
+<ion-content>
+
+  <div class="container">
+
+    <h1 class="title">Hola, Usuario</h1>
+    <p class="subtitle">¿Cómo te sientes hoy?</p>
+
+    <!-- BLOQUE ESTADO EMOCIONAL -->
+<div class="estado-card">
+  <div class="estado-header">
+    <span class="titulo-seccion">Estado emocional 😁</span>
+  </div>
+
+  <button class="btn-estado" (click)="goTo('tabs/formulario-emocionales')">
+    Registrar estado de hoy
+  </button>
+
+  <div class="stats">
+    <div class="stat-item">
+      <h3>09</h3>
+      <p>Días registrados</p>
+    </div>
+
+    <div class="stat-item">
+      <h3>40%</h3>
+      <p>Estado positivo</p>
+    </div>
+  </div>
+</div>
+
+<!--  ACCESO RÁPIDO -->
+<h3 class="titulo-acceso">Acceso Rápido</h3>
+
+<div class="quick-access">
+
+  <button class="qa-card" (click)="goTo('tabs/meditaciones')">
+    <img src="assets/icon/meditacioncorazon.png" class="qa-icon">
+    <span>Meditación</span>
+  </button>
+
+  <button class="qa-card" (click)="goTo('tabs/contacto')">
+    <img src="assets/icon/ayuda-psicologica.png" class="qa-icon">
+    <span>Ayuda</span>
+  </button>
+
+</div>
+
+  </div>
+
+</ion-content>
+

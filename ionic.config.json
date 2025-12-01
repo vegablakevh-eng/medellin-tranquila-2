@@ -1,0 +1,7 @@
+{
+  "name": "medellin-tranquila",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

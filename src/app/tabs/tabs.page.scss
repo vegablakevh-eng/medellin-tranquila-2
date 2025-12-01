@@ -1,0 +1,30 @@
+/* Fuerza a que los tab-buttons estén en una sola fila horizontal */
+ion-tab-bar {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+  height: 70px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ccc;
+}
+
+/* Evita que Ionic coloque el contenido vertical */
+ion-tab-button {
+  display: flex !important;
+  flex-direction: row !important;   /* ← AQUÍ EL ARREGLO REAL */
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0;
+}
+
+/* Tamaño de los iconos */
+.tab-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+

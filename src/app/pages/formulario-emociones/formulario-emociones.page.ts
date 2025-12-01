@@ -1,94 +1,80 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { 
-  IonContent, 
-  IonHeader, 
-  IonTitle, 
-  IonToolbar
-} from '@ionic/angular/standalone';
+import { EmocionesService } from '../../services/emociones.service';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-formulario-emociones',
   templateUrl: './formulario-emociones.page.html',
   styleUrls: ['./formulario-emociones.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule, 
-    FormsModule,
-    IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonToolbar
-  ]
+  imports: [IonicModule, CommonModule],
 })
-export class FormularioEmocionalPage implements OnInit {
-  daysRegistered: number = 9;
-  positiveState: number = 40;
-  dateActually: string = '';
-  selectedEmotion: string = ''; 
-    energyLevel: number = 0;
-  constructor() { }
+export class FormularioEmocionesPage implements OnInit, OnDestroy {
+
+  energia = 100; // Nivel de energía inicial
+  emocionesDelDia: Array<'feliz' | 'tranquilo' | 'ansioso' | 'triste'> = [];
+
+  // Valores de energía por emoción
+  valores: Record<'feliz' | 'tranquilo' | 'ansioso' | 'triste', number> = {
+    feliz: 5,
+    tranquilo: 2,
+    ansioso: -3,
+    triste: -5
+  };
+
+  private intervaloGuardado!: any;
+
+  constructor(
+    private emocionesService: EmocionesService,
+    private auth: Auth
+  ) {}
 
   ngOnInit() {
-    this.getDate();
+    // Revisar cada minuto si es final del día
+    this.intervaloGuardado = setInterval(() => {
+      const ahora = new Date();
+      if (ahora.getHours() === 23 && ahora.getMinutes() === 59) {
+        this.guardarAutomatico();
+      }
+    }, 60000);
   }
 
-   setEnergyLevel(level: number): void {
-    this.energyLevel = level;
-    console.log('Nivel de energía:', level);
+  ngOnDestroy() {
+    clearInterval(this.intervaloGuardado);
   }
 
-  // Obtener etiqueta del nivel
-  getEnergyLabel(): string {
-    switch(this.energyLevel) {
-      case 1: return 'Bajo';
-      case 2: return 'Medio';
-      case 3: return 'Alto';
-      default: return 'No seleccionado';
-    }
+  // El usuario pulsa una emoción
+  agregarEmocion(emocion: 'feliz' | 'tranquilo' | 'ansioso' | 'triste') {
+    this.emocionesDelDia.push(emocion);
+    this.actualizarEnergia();
   }
 
-  // Obtener color según el nivel
-  getEnergyColor(): string {
-    switch(this.energyLevel) {
-      case 1: return 'bg-danger';
-      case 2: return 'bg-warning';
-      case 3: return 'bg-success';
-      default: return 'bg-secondary';
-    }
+  // Actualiza la barra de energía según emociones del día
+  actualizarEnergia() {
+    let total = 100; // siempre inicia en 100
+    this.emocionesDelDia.forEach(e => {
+      // 🔹 Cast seguro para que no de error de TS
+      total += this.valores[e as 'feliz' | 'tranquilo' | 'ansioso' | 'triste'];
+    });
+    this.energia = Math.max(0, Math.min(total, 100)); // Mantener entre 0 y 100%
   }
 
-  getDate(): void {
-    const now = new Date();
-    const options: Intl.DateTimeFormatOptions = { 
-      day: 'numeric', 
-      month: 'long', 
-      year: 'numeric' 
-    };
-    this.dateActually = now.toLocaleDateString('es-ES', options);
+  // Guardado automático al final del día
+  async guardarAutomatico() {
+    const usuario = this.auth.currentUser;
+    if (!usuario) return;
+
+    await this.emocionesService.registrarEmocion(
+      usuario.uid,
+      this.emocionesDelDia,
+      this.energia
+    );
+
+    // Reiniciar día
+    this.emocionesDelDia = [];
+    this.energia = 100;
   }
 
-  // Función para seleccionar emoción
-  selectEmotion(emotion: string): void {
-    this.selectedEmotion = emotion;
-    console.log('Emoción seleccionada:', emotion);
-  }
-
-  registerEmotionalState() {
-    if (this.selectedEmotion) {
-      console.log('Registrando estado emocional:', this.selectedEmotion);
-      // Aquí puedes guardar la emoción seleccionada
-    } else {
-      console.log('Por favor selecciona una emoción');
-    }
-  }
-
-  goToMeditation() {
-    console.log('Navegar a meditación');
-  }
-
-  goToHelp() {
-    console.log('Navegar a ayuda');
-  }
 }

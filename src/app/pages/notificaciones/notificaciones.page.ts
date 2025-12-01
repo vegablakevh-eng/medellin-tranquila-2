@@ -8,7 +8,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   templateUrl: './notificaciones.page.html',
   styleUrls: ['./notificaciones.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonToolbar, CommonModule, FormsModule]
 })
 export class NotificacionesPage implements OnInit {
 

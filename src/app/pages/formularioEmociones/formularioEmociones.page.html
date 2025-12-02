@@ -1,24 +1,78 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Estado emocional</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="header-container">
+  <div class="header-content">
+    <h2 class="titulo-header">Registro diario</h2>
+  </div>
+</div>
+
 
 <ion-content class="ion-padding">
 
-  <h2 class="titulo">¿Cómo te sientes hoy?</h2>
+  <!-- ---------- SECCIÓN EMOCIONES ---------- -->
+  <div class="card">
 
-  <div class="emociones-container">
-    <ion-button color="success" expand="block" (click)="seleccionarEmocion('feliz')">😊 Feliz</ion-button>
-    <ion-button color="tertiary" expand="block" (click)="seleccionarEmocion('tranquilo')">😌 Tranquilo</ion-button>
-    <ion-button color="warning" expand="block" (click)="seleccionarEmocion('ansioso')">😟 Ansioso</ion-button>
-    <ion-button color="danger" expand="block" (click)="seleccionarEmocion('triste')">😢 Triste</ion-button>
+    <h2 class="titulo-seccion">¿Cómo te sientes?</h2>
+
+    <div class="emociones-grid">
+
+      <!-- Botón FELIZ -->
+      <div class="emocion-item" (click)="seleccionarEmocion('feliz')">
+        <span class="emoji">😊</span>
+        <p>Feliz</p>
+      </div>
+
+      <!-- Botón TRANQUILO -->
+      <div class="emocion-item" (click)="seleccionarEmocion('tranquilo')">
+        <span class="emoji">😌</span>
+        <p>Tranquilo</p>
+      </div>
+
+      <!-- Botón ANSIOSO -->
+      <div class="emocion-item" (click)="seleccionarEmocion('ansioso')">
+        <span class="emoji">😵‍💫</span>
+        <p>Ansioso</p>
+      </div>
+
+      <!-- Botón TRISTE -->
+      <div class="emocion-item" (click)="seleccionarEmocion('triste')">
+        <span class="emoji">😔</span>
+        <p>Triste</p>
+      </div>
+
+    </div>
   </div>
 
-  <h3 class="titulo-energia">Nivel de energía</h3>
-  <div class="barra-container">
-    <div class="barra" [style.width.%]="energia"></div>
+  <!-- ---------- SECCIÓN BARRA DE ENERGÍA ---------- -->
+  <div class="card">
+
+    <h2 class="titulo-seccion">Nivel de energía</h2>
+
+    <!-- Barra -->
+    <div class="barra-container">
+      <div
+        class="barra"
+        [style.width.%]="energia"
+        [style.background]="getColorEnergia()"
+      ></div>
+    </div>
+
+    <!-- Emojis debajo -->
+    <div class="emojis-final">
+      <div class="emoji-col">
+        <span>🥱</span>
+        <p>Bajo</p>
+      </div>
+
+      <div class="emoji-col">
+        <span>😐</span>
+        <p>Medio</p>
+      </div>
+
+      <div class="emoji-col">
+        <span>🤩</span>
+        <p>Alto</p>
+      </div>
+    </div>
+
   </div>
-  <p class="valor-energia">{{ energia }}%</p>
 
 </ion-content>

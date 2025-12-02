@@ -1,42 +1,105 @@
-.emociones-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
+/* ======= CONTENEDORES GENERALES ======= */
+/* 🔵 Contenedor principal del header */
+.header-container {
+  width: 100%;
+  padding: 25px 20px;
+  background: linear-gradient(90deg, #0046c7, #3f8bff);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  color: white;
+}
+.card {
+  background: #ffffff;
+  padding: 20px;
+  margin-top: 25px;
+  border-radius: 12px;
+  border: 1px solid #1f53a0;
 }
 
-.titulo {
-  text-align: center;
-  font-size: 22px;
+/* Título de cada sección */
+.titulo-seccion {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1e3a8a;
+  margin-bottom: 15px;
+}
+
+/* Fecha */
+.fecha-container {
   margin-bottom: 10px;
 }
-
-.titulo-energia {
-  text-align: center;
-  margin-top: 30px;
-  font-size: 18px;
-  color: #333;
+.fecha-titulo {
+  font-size: 16px;
+  font-weight: bold;
+  color: #13961e;
 }
+
+/* ======= GRID DE EMOCIONES ======= */
+
+.emociones-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.emocion-item {
+  background: #fafafa;
+  border: 1px solid #d1d5db;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.emocion-item:hover {
+  transform: scale(1.03);
+}
+
+.emoji {
+  font-size: 35px;
+  display: block;
+}
+
+/* ======= BARRA DE ENERGÍA ======= */
 
 .barra-container {
   width: 100%;
-  height: 25px;
-  background: #e0e0e0;
-  border-radius: 12px;
-  margin-top: 10px;
+  height: 20px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
 }
 
 .barra {
   height: 100%;
-  background: #1f1e7e;
-  border-radius: 12px;
-  transition: width 0.3s ease-in-out;
+  transition: width 0.4s ease, background-color 0.3s ease;
 }
 
-.valor-energia {
+/* ======= EMOJIS FINALES ======= */
+
+.emojis-final {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: 10px;
   text-align: center;
+}
+
+.emoji-col span {
+  font-size: 25px;
+}
+
+.emoji-col p {
+  font-size: 13px;
   margin-top: 5px;
-  font-weight: bold;
-  font-size: 16px;
-  color: #1e3a8a;
+}
+
+/* ======= RESPONSIVE ======= */
+
+@media (max-width: 420px) {
+  .emociones-grid {
+    grid-template-columns: 1fr;
+  }
 }

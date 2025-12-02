@@ -84,16 +84,19 @@ export class FormularioEmocionalPage implements OnInit, OnDestroy {
   async seleccionarEmocion(emocion: 'feliz' | 'tranquilo' | 'ansioso' | 'triste') {
     if (this.cargando) return;
 
-    const index = this.emocionesDelDia.indexOf(emocion);
-    if (index === -1) {
-      this.emocionesDelDia.push(emocion);
-      this.energia += this.VALORES_ENERGIA[emocion];
-    } else {
-      this.emocionesDelDia.splice(index, 1);
-      this.energia -= this.VALORES_ENERGIA[emocion];
-    }
+    // Siempre se registra la emoción aunque sea repetida
+    this.emocionesDelDia.push(emocion);
 
-    await this.guardarEmociones();
+    // Actualiza energía dinámicamente
+    this.energia += this.VALORES_ENERGIA[emocion];
+
+    this.energia = Math.max(10, Math.min(this.energia, 100));
+    await this.guardarEmociones(); 
+  }
+   getColorEnergia(): string {
+    if (this.energia >= 70) return '#1f7e1f'; // Verde
+    if (this.energia >= 40) return '#e6c200'; // Amarillo
+    return '#e63946'; // Rojo
   }
 
   private async guardarEmociones() {

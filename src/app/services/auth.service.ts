@@ -1,34 +1,46 @@
-import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, User } from 'firebase/auth';
-import { firebaseAuth } from '../firebase/firebase.config';
+import { Injectable, inject } from '@angular/core';
+import { 
+  Auth, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signOut, 
+  User,
+  user 
+} from '@angular/fire/auth';
+import { Observable, from, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  auth: Auth = firebaseAuth; //  Auth ya inicializado
-  currentUser: User | null = null;
+  private auth: Auth = inject(Auth);
+  user$: Observable<User | null>;
 
   constructor() {
-    onAuthStateChanged(this.auth, user => {
-      this.currentUser = user;
-      console.log('Usuario actual:', user);
-    });
+    // user() es un observable que emite el estado actual del usuario
+    this.user$ = user(this.auth);
   }
 
-  login(email: string, password: string): Promise<any> {
-    return signInWithEmailAndPassword(this.auth, email, password);
+  login(email: string, password: string) {
+    return from(signInWithEmailAndPassword(this.auth, email, password));
   }
 
-  register(email: string, password: string): Promise<any> {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+  register(email: string, password: string) {
+    return from(createUserWithEmailAndPassword(this.auth, email, password));
   }
 
-  logout(): Promise<void> {
-    return signOut(this.auth);
+  logout() {
+    return from(signOut(this.auth));
   }
 
-  getCurrentUser(): User | null {
-    return this.currentUser;
+  getCurrentUser(): Observable<User | null> {
+    return this.user$;
+  }
+
+  // Método adicional para obtener el token del usuario actual
+  async getCurrentUserToken(): Promise<string | null> {
+    const user = this.auth.currentUser;
+    if (!user) return null;
+    return user.getIdToken();
   }
 }

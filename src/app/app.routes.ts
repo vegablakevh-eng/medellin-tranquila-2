@@ -44,7 +44,7 @@ export const routes: Routes = [
   },
 
   // ⭐ Rutas fuera de tabs
- // { path: 'historial', component: HistorialPage },
+ { path: 'historial', component: HistorialPage },
   //{ path: 'respiracion', component: RespiracionPage },
     //{ path: 'contacto', component: ContactoPage },
  // { path: 'privacidad', component: PrivacidadPage },

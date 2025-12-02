@@ -28,15 +28,7 @@ import {
     
     // Componentes de Ionic (UI)
     IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonToolbar,
-    IonList,
-    IonListHeader,
-    IonItem,
-    IonLabel,
-    IonToggle,
-    IonButton 
+    
   ]
 })
 export class ConfiguracionPage implements OnInit {

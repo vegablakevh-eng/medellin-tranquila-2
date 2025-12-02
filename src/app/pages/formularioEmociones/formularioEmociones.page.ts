@@ -121,7 +121,23 @@ export class FormularioEmocionalPage implements OnInit, OnDestroy {
       this.cargando = false;
     }
   }
+ //FUNCIÓN AÑADIDA PARA PRUEBAS:
+guardarEstado() {
+    const user = this.auth.currentUser;
+    if (!user) {
+      console.error('No hay usuario autenticado');
+      return;
+    }
 
+    this.emocionesService.registrarEmocion(
+      user.uid,
+      this.emocionesDelDia,
+      this.energia
+    )
+    .then(() => console.log("✔ Estado guardado manualmente"))
+    .catch(e => console.error("Error al guardar estado", e));
+  }
+   // ---te
   private async guardarAutomatico() {
     if (this.emocionesDelDia.length > 0) {
       await this.guardarEmociones();

@@ -30,7 +30,7 @@ export class RegisterPage {
 
     this.loading = true;
     try {
-      await this.authService.register(this.email, this.password);
+      await this.authService.registrarUsuario(this.email, this.password);
       this.router.navigate(['/dashboard']); // redirige al dashboard
     } catch (err: any) {
       this.error = err.message || 'Error creando usuario';

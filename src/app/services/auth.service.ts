@@ -1,13 +1,7 @@
+// src/app/services/auth.service.ts
 import { Injectable, inject } from '@angular/core';
-import { 
-  Auth, 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
-  signOut, 
-  User,
-  user 
-} from '@angular/fire/auth';
-import { Observable, from, map } from 'rxjs';
+import { Auth, user, User, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,30 +11,41 @@ export class AuthService {
   user$: Observable<User | null>;
 
   constructor() {
-    // user() es un observable que emite el estado actual del usuario
+    // Observable del estado del usuario
     this.user$ = user(this.auth);
   }
 
-  login(email: string, password: string) {
-    return from(signInWithEmailAndPassword(this.auth, email, password));
+  // Registrar usuario
+  registrarUsuario(email: string, password: string) {
+    return createUserWithEmailAndPassword(this.auth, email, password);
+
   }
 
-  register(email: string, password: string) {
-    return from(createUserWithEmailAndPassword(this.auth, email, password));
+  // Login usuario
+  loginUsuario(email: string, password: string) {
+    return signInWithEmailAndPassword(this.auth, email, password);
+
   }
 
+  // Logout
   logout() {
     return from(signOut(this.auth));
   }
 
-  getCurrentUser(): Observable<User | null> {
+  // Obtener usuario actual como observable
+  obtenerUsuarioActual(): Observable<User | null> {
     return this.user$;
   }
 
-  // Método adicional para obtener el token del usuario actual
-  async getCurrentUserToken(): Promise<string | null> {
-    const user = this.auth.currentUser;
-    if (!user) return null;
-    return user.getIdToken();
+  // Obtener usuario actual como objeto (sin observable)
+  obtenerUsuarioActualValue(): User | null {
+    return this.auth.currentUser;
+  }
+
+  // Obtener token del usuario actual
+  async obtenerTokenUsuario(): Promise<string | null> {
+    const usuario = this.auth.currentUser;
+    if (!usuario) return null;
+    return usuario.getIdToken();
   }
 }

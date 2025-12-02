@@ -24,7 +24,7 @@ export class LoginPage {
     this.loading = true;
     this.error = '';
     try {
-      await this.authService.login(this.email, this.password);
+      await this.authService.loginUsuario(this.email, this.password);
       this.router.navigate(['tabs/dashboard']);
     } catch (err: any) {
       this.error = err.message || 'Error en el login';

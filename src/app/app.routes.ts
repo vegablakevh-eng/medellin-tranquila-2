@@ -10,8 +10,7 @@ import { RespiracionPage } from './pages/respiracion/respiracion.page';
 import { ContactoPage } from './pages/contacto/contacto.page';
 import { PrivacidadPage } from './pages/privacidad/privacidad.page';
 import { NotificacionesPage } from './pages/notificaciones/notificaciones.page';
-import { FormularioEmocionesPage } from './pages/formulario-emociones/formulario-emociones.page';
-
+import { FormularioEmocionalPage } from './pages/formularioEmociones/formularioEmociones.page';
 import { TabsPage } from './tabs/tabs.page';
 
 export const routes: Routes = [
@@ -25,10 +24,8 @@ export const routes: Routes = [
   // Registro
   { path: 'register', component: RegisterPage },
 
-
-
   // Formulario emocional
-  //{ path: 'formulario-emocionales', component: FormularioEmocionesPage },
+  { path: 'formulario-emocionales', component: FormularioEmocionalPage },
 
   // ⭐ TABS (5 pestañas principales)
   {
@@ -38,7 +35,7 @@ export const routes: Routes = [
       { path: 'dashboard', loadComponent: () => import('./pages/dashboard/dashboard.page').then(m => m.DashboardPage)},
       { path: 'meditaciones', component: MeditacionesPage },
       { path: 'foro', component: ForoPage },
-      { path: 'formulario-emocionales', component: FormularioEmocionesPage },
+      { path: 'formularioEmociones', component: FormularioEmocionalPage },
       { path: 'contacto', component: ContactoPage },
       { path: 'configuracion', component: ConfiguracionPage },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -49,7 +46,7 @@ export const routes: Routes = [
   // ⭐ Rutas fuera de tabs
  // { path: 'historial', component: HistorialPage },
   //{ path: 'respiracion', component: RespiracionPage },
-    { path: 'contacto', component: ContactoPage },
+    //{ path: 'contacto', component: ContactoPage },
  // { path: 'privacidad', component: PrivacidadPage },
  // { path: 'notificaciones', component: NotificacionesPage },
     { path: 'register', component: RegisterPage }

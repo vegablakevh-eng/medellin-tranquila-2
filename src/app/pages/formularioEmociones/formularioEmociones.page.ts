@@ -2,16 +2,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { EmocionesService } from '../../services/emociones.service';
-import { Auth } from '@angular/fire/auth';
-
+import { provideAuth, getAuth } from '@angular/fire/auth';
 @Component({
-  selector: 'app-formulario-emociones',
-  templateUrl: './formulario-emociones.page.html',
-  styleUrls: ['./formulario-emociones.page.scss'],
+  selector: 'app-formularioEmociones',
+  templateUrl: './formularioEmociones.page.html',
+  styleUrls: ['./formularioEmociones.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule],
 })
-export class FormularioEmocionesPage implements OnInit, OnDestroy {
+export class FormularioEmocionalPage implements OnInit, OnDestroy {
 
   energia = 100; // Nivel de energía inicial
   emocionesDelDia: Array<'feliz' | 'tranquilo' | 'ansioso' | 'triste'> = [];
@@ -27,7 +26,7 @@ export class FormularioEmocionesPage implements OnInit, OnDestroy {
   private intervaloGuardado!: any;
 
   constructor(
-    private emocionesService: EmocionesService,
+   // private emocionesService: EmocionesService,
     private auth: Auth
   ) {}
 
@@ -66,11 +65,11 @@ export class FormularioEmocionesPage implements OnInit, OnDestroy {
     const usuario = this.auth.currentUser;
     if (!usuario) return;
 
-    await this.emocionesService.registrarEmocion(
-      usuario.uid,
-      this.emocionesDelDia,
-      this.energia
-    );
+   // await this.emocionesService.registrarEmocion(
+   //   usuario.uid,
+   //   this.emocionesDelDia,
+   //   this.energia
+   // );
 
     // Reiniciar día
     this.emocionesDelDia = [];

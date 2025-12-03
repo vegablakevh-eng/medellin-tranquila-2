@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EmocionesService } from '../../services/emociones.service';
 import { Auth, user } from '@angular/fire/auth';
 import { firstValueFrom } from 'rxjs';
-
+import { FirestoreService } from 'src/app/services/firestore';
 @Component({
   selector: 'app-formularioEmociones',
   templateUrl: './formularioEmociones.page.html',
